@@ -72,7 +72,6 @@ class MoveGroupPythonIntefaceTutorial(object):
 
   def go_to_joint_state(self):
     move_group = self.move_group
-
     joint_goal = move_group.get_current_joint_values()
     joint_goal[0] = pi/2
     joint_goal[1] = -pi/2
@@ -89,12 +88,6 @@ class MoveGroupPythonIntefaceTutorial(object):
   def go_to_pose_goal(self):
     move_group = self.move_group
     pose_goal = move_group.get_current_pose().pose
-
-    # pose_goal = geometry_msgs.msg.Pose()
-    # pose_goal.position.x = -0.1
-    # pose_goal.position.y = -0.4
-    # pose_goal.position.z = 0.4
-
     pose_goal.position.x += 0.1
     pose_goal.position.z += 0.1
 
