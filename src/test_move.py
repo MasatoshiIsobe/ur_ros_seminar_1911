@@ -20,9 +20,9 @@ def move1():
     g.trajectory = JointTrajectory()
     g.trajectory.joint_names = JOINT_NAMES
     g.trajectory.points = [
-        JointTrajectoryPoint(positions=Q1, velocities=[0]*6, time_from_start=rospy.Duration(2.0)),
-        JointTrajectoryPoint(positions=Q2, velocities=[0]*6, time_from_start=rospy.Duration(3.0)),
-        JointTrajectoryPoint(positions=Q3, velocities=[0]*6, time_from_start=rospy.Duration(4.0))]
+        JointTrajectoryPoint(positions=Q1, velocities=[0]*6, time_from_start=rospy.Duration(5.0)),
+        JointTrajectoryPoint(positions=Q2, velocities=[0]*6, time_from_start=rospy.Duration(8.0)),
+        JointTrajectoryPoint(positions=Q3, velocities=[0]*6, time_from_start=rospy.Duration(10.0))]
     client.send_goal(g)
     try:
         client.wait_for_result()
@@ -39,9 +39,9 @@ def move_disordered():
     q2 = [Q2[i] for i in order]
     q3 = [Q3[i] for i in order]
     g.trajectory.points = [
-        JointTrajectoryPoint(positions=q1, velocities=[0]*6, time_from_start=rospy.Duration(2.0)),
-        JointTrajectoryPoint(positions=q2, velocities=[0]*6, time_from_start=rospy.Duration(3.0)),
-        JointTrajectoryPoint(positions=q3, velocities=[0]*6, time_from_start=rospy.Duration(4.0))]
+        JointTrajectoryPoint(positions=q1, velocities=[0]*6, time_from_start=rospy.Duration(5.0)),
+        JointTrajectoryPoint(positions=q2, velocities=[0]*6, time_from_start=rospy.Duration(8.0)),
+        JointTrajectoryPoint(positions=q3, velocities=[0]*6, time_from_start=rospy.Duration(10.0))]
     client.send_goal(g)
     client.wait_for_result()
     
@@ -50,7 +50,7 @@ def move_repeated():
     g.trajectory = JointTrajectory()
     g.trajectory.joint_names = JOINT_NAMES
    
-    d = 2.0
+    d = 5.0
     g.trajectory.points = []
     for i in range(10):
         g.trajectory.points.append(
@@ -74,9 +74,9 @@ def move_interrupt():
     g.trajectory = JointTrajectory()
     g.trajectory.joint_names = JOINT_NAMES
     g.trajectory.points = [
-        JointTrajectoryPoint(positions=Q1, velocities=[0]*6, time_from_start=rospy.Duration(2.0)),
-        JointTrajectoryPoint(positions=Q2, velocities=[0]*6, time_from_start=rospy.Duration(3.0)),
-        JointTrajectoryPoint(positions=Q3, velocities=[0]*6, time_from_start=rospy.Duration(4.0))]
+        JointTrajectoryPoint(positions=Q1, velocities=[0]*6, time_from_start=rospy.Duration(5.0)),
+        JointTrajectoryPoint(positions=Q2, velocities=[0]*6, time_from_start=rospy.Duration(8.0)),
+        JointTrajectoryPoint(positions=Q3, velocities=[0]*6, time_from_start=rospy.Duration(10.0))]
     
     client.send_goal(g)
     time.sleep(2.0)
@@ -92,7 +92,7 @@ def main():
     global client
     try:
         rospy.init_node("test_move", anonymous=True, disable_signals=True)
-        client = actionlib.SimpleActionClient('/scaled_pos_traj_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+        client = actionlib.SimpleActionClient('/scaled_pos_joint_traj_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
         print "Waiting for server..."
         client.wait_for_server()
         print "Connected to server"
